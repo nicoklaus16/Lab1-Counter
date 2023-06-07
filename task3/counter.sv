@@ -9,7 +9,15 @@ module counter #(
   output logic [WIDTH-1:0] count     // count output
 );
 
-always_ff @ (posedge clk)
+//Solution to step 1
+/*always_ff @ (posedge clk)
   if (rst) count <= {WIDTH{1'b0}};
-  else     count <= ld ? v : count + {{WIDTH-1{1'b0}},1'b1};
+  else     count <= ld ? v : count + {{WIDTH-1{1'b0}},1'b1};*/
+
+//Solution to step 2
+always_ff @ (posedge clk)
+    if (rst) count <= {WIDTH{1'b0}};
+    else begin
+                count <= count + {{WIDTH-1{1'b0}}, ld};
+    end
 endmodule
